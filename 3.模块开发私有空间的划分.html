@@ -1,0 +1,90 @@
+<!-- 把函数的封装对象中 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+</head>
+<body>
+    <input type="text" id="text_a">
+    <select>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="×">×</option>
+        <option value="÷">÷</option>
+    </select>
+    <input type="text" id="text_b">
+    <input type="button" name="" value="=" id="btn">
+    <input type="text" name="" id="txt_res">
+    <!-- 需要实现加减乘除的方式 -->
+</body>
+<script type="text/javascript">
+
+  // 模块定义私有空间
+
+ var jisuan = (function(){
+    // 私有的打印机制
+    function log(){
+        console.log("哈哈哈");
+    }
+    log();
+    function jia(a,b){
+        return a + b;
+    }
+    function jian(a,b){
+        return a - b;
+    }
+    function cheng(a,b){
+        return a * b;
+    }
+     function chu(a,b){
+        return a / b;
+    }
+    return {
+        jia:jia,
+        jian:jian,
+        cheng:cheng,
+        chu:chu
+    }
+ })()
+
+</script>
+<script type="text/javascript">
+
+var val = document.querySelector("select");
+var a = document.querySelector("#text_a");
+var b = document.querySelector("#text_b");
+var res = document.querySelector("#txt_res");
+var btn = document.querySelector("#btn");
+btn.onclick = function(){
+    var a1 = Number(a.value);
+    var b2 = Number(b.value);
+
+    switch(val.value) {
+        case "+":
+            res.value = jisuan.jia(a1, b2);
+            break;
+        case "-":
+            res.value = jisuan.jian(a1, b2);
+            break;
+        case "×":
+            res.value = jisuan.cheng(a1, b2);
+            break;
+        case "÷":
+            res.value = jisuan.chu(a1, b2);
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
+</script>
+</html>

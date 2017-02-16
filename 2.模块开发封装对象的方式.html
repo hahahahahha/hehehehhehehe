@@ -1,0 +1,100 @@
+<!-- 把函数的封装对象中 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+</head>
+<body>
+    <input type="text" id="text_a">
+    <select>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="×">×</option>
+        <option value="÷">÷</option>
+    </select>
+    <input type="text" id="text_b">
+    <input type="button" name="" value="=" id="btn">
+    <input type="text" name="" id="txt_res">
+    <!-- 需要实现加减乘除的方式 -->
+</body>
+<script type="text/javascript">
+// 从代码层面已经有了模块的感觉了
+// 把一类的东西放在对象中(例如计算类),虽然现在一个文件中只暴露出来一个"变量",但是也会造成变量污染(不是问题)
+// 注意：我们可以再用一个对象把他包装起来
+  // var jisuan = {
+  //   jia:function(a,b){
+  //       return a + b;
+  //   },
+  //   jian:function(a,b){
+  //       return a - b;
+  //   },
+  //   cheng:function(a,b){
+  //       return a * b;
+  //   },
+  //   chu:function(a,b){
+  //       return a / b;
+  //   },
+  // }
+
+  // 高内聚低耦合->可维护性比较高,模块之间没有太多关联
+  // 缺点:没私有有空间（定义公开和私有）->登陆时候打印日志属于私有成员不能暴露
+  // 模块定义私有空间
+
+  var math = {
+     jisuan:{
+        jia:function(a,b){
+            return a + b;
+        },
+        jian:function(a,b){
+            return a - b;
+        },
+        cheng:function(a,b){
+            return a * b;
+        },
+        chu:function(a,b){
+            return a / b;
+        },
+    }
+  }
+
+</script>
+<script type="text/javascript">
+
+var val = document.querySelector("select");
+var a = document.querySelector("#text_a");
+var b = document.querySelector("#text_b");
+var res = document.querySelector("#txt_res");
+var btn = document.querySelector("#btn");
+btn.onclick = function(){
+    var a1 = Number(a.value);
+    var b2 = Number(b.value);
+
+    switch(val.value) {
+        case "+":
+            res.value = math.jisuan.jia(a1, b2);
+            break;
+        case "-":
+            res.value = math.jisuan.jian(a1, b2);
+            break;
+        case "×":
+            res.value = math.jisuan.cheng(a1, b2);
+            break;
+        case "÷":
+            res.value = math.jisuan.chu(a1, b2);
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
+</script>
+</html>

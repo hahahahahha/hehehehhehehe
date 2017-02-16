@@ -1,0 +1,102 @@
+<!-- 把函数的封装对象中 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+</head>
+<body>
+    <input type="text" id="text_a">
+    <select>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="×">×</option>
+        <option value="÷">÷</option>
+        <!-- 多一个取余米快 -->
+        <option value="%">%</option>
+    </select>
+    <input type="text" id="text_b">
+    <input type="button" name="" value="=" id="btn">
+    <input type="text" name="" id="txt_res">
+    <!-- 需要实现加减乘除的方式 -->
+</body>
+<script type="text/javascript" src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+// 多一个方法,取余
+// 新增需求
+// mo()->取模
+
+(function(jisuan,$,zp){
+    // $
+    // 依赖模块内部,不违背高内聚低耦合
+    // 如果传入参数为$,直接使用的话，使用的是全局,并没有依赖内部
+    // 例如:我在函数调用时传入Jquery，那么模块内部$代表的是jq对象，如果我调用函数时传入zepoto的话,模块内部$就代表zepto对象,所以结论就是不能在里面直接使用$，一定要调用的时候传入
+    jisuan.jia = function(a,b){
+        return a + b;
+    }
+    jisuan.jian = function(a,b){
+        return a - b;
+    }
+    jisuan.cheng = function(a,b){
+        return a * b;
+    }
+    jisuan.chu = function(a,b){
+        return a / b;
+    }
+    window.jisuan = jisuan;
+ })(window.jisuan || {},jquery,zepto);
+
+ // 新增需求
+ // 如果存在就扩展，如果不存在我就增加新的方法
+
+ // 大坑:自调用函数后面一定加分号,靠靠靠靠靠靠！！！！！！！！！！！！！！！！找了两个小时
+ (function(jisuan){
+    jisuan.mo = function(a,b){
+        return a % b;
+    }
+
+ })(window.jisuan || {})
+
+</script>
+<script type="text/javascript">
+
+var val = document.querySelector("select");
+var a = document.querySelector("#text_a");
+var b = document.querySelector("#text_b");
+var res = document.querySelector("#txt_res");
+var btn = document.querySelector("#btn");
+btn.onclick = function(){
+    var a1 = Number(a.value);
+    var b2 = Number(b.value);
+
+    switch(val.value) {
+        case "+":
+            res.value = jisuan.jia(a1, b2);
+            break;
+        case "-":
+            res.value = jisuan.jian(a1, b2);
+            break;
+        case "×":
+            res.value = jisuan.cheng(a1, b2);
+            break;
+        case "÷":
+            res.value = jisuan.chu(a1, b2);
+            break;
+        case "%":
+            res.value = jisuan.mo(a1, b2);
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
+</script>
+</html>
